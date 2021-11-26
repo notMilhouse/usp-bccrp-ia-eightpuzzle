@@ -141,12 +141,12 @@ even(X) :-
     0 is mod(X, 2).
 
 solvable(EstadoAtual) :-
-    inversoes_estado(EstadoAtual, NumeroInversoes),
+    calculo_inversoes_estado(EstadoAtual, NumeroInversoes),
     even(NumeroInversoes).
 
 
 % the goal state is defined as a fact
-goal_state([1,2,3,8,0,4,7,6,5]).
+goal_state([1,3,2,8,0,4,7,6,5]).
 
 % a b c
 % d e f 
@@ -159,8 +159,8 @@ goal_state([1,2,3,8,0,4,7,6,5]).
 % Then the elements in the goal state are mapped to their respective positions
 %   in practice, this represents the desired positions for each element
 piece_goal_position(1, a).
-piece_goal_position(2, b).
-piece_goal_position(3, c).
+piece_goal_position(3, b).
+piece_goal_position(2, c).
 piece_goal_position(4, f).
 piece_goal_position(5, i).
 piece_goal_position(6, h).
@@ -200,7 +200,7 @@ h_function(EstadoAtual, F) :-
 :- op(400,yfx,'#').    /* Node builder notation */
 
 solve(State,Soln) :- 
-    solvable(State),
+    %solvable(State),
     f_function(State,0,F),
     search([State#0#F#[]],S), reverse(S,Soln), !.
 
